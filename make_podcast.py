@@ -127,7 +127,8 @@ def main():
     for index, mp3 in enumerate(sorted(list(get_mp3s(args.path)))):
         add_item_to_podcast(rss, info, get_file_info(mp3), index)
 
-    print(ETree.tostring(rss, encoding='unicode'))
+    tree = ETree.ElementTree(rss)
+    tree.write(path / '_.xml', encoding='utf-8', xml_declaration=True)
 
 if __name__ == '__main__':
     main()
