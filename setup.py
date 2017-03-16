@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='make-podcast',
-    version='1.0.0',
+    version='1.0.1',
     description='Generate podcast XML from a directory of MP3 files',
     url='https://github.com/williamjacksn/make_podcast',
     author='William Jackson',
