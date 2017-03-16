@@ -14,54 +14,70 @@ def get_pub_date(index):
 
 
 def make_podcast_xml(podcast_info):
-    rss = ETree.Element('rss')
-    rss.set('xmlns:atom', 'http://www.w3.org/2005/Atom')
-    rss.set('xmlns:itunes', 'http://www.itunes.com/dtds/podcast-1.0.dtd')
-    rss.set('version', '2.0')
+    rss_attrib = {'version': '2.0', 'xmlns:atom': 'http://www.w3.org/2005/Atom',
+                  'xmlns:itunes': 'http://www.itunes.com/dtds/podcast-1.0.dtd'}
+    rss = ETree.Element('rss', attrib=rss_attrib)
+    rss.text = '\n  '
+    rss.tail = '\n'
     channel = ETree.SubElement(rss, 'channel')
-    link_self = ETree.SubElement(channel, 'atom:link')
-    link_self.set('href', '{base_url}_.xml'.format(**podcast_info))
-    link_self.set('rel', 'self')
+    channel.text = '\n    '
+    channel.tail = '\n'
+    link_self = ETree.SubElement(channel, 'atom:link', href='{base_url}_.xml'.format(**podcast_info), rel='self')
+    link_self.tail = '\n    '
     language = ETree.SubElement(channel, 'language')
     language.text = 'en-us'
+    language.tail = '\n    '
     title = ETree.SubElement(channel, 'title')
     title.text = podcast_info['title']
+    title.tail = '\n    '
     author = ETree.SubElement(channel, 'itunes:author')
     author.text = podcast_info['author']
-    image = ETree.SubElement(channel, 'itunes:image')
-    image.set('href', '{base_url}_.jpg'.format(**podcast_info))
+    author.tail = '\n    '
+    image = ETree.SubElement(channel, 'itunes:image', href='{base_url}_.jpg'.format(**podcast_info))
+    image.tail = '\n    '
     link = ETree.SubElement(channel, 'link')
     link.text = podcast_info['base_url']
+    link.tail = '\n    '
     description = ETree.SubElement(channel, 'description')
     description.text = podcast_info['description']
-    category = ETree.SubElement(channel, 'itunes:category')
-    category.set('text', 'Arts')
-    sub_category = ETree.SubElement(category, 'itunes:category')
-    sub_category.set('text', 'Literature')
+    description.tail = '\n    '
+    category = ETree.SubElement(channel, 'itunes:category', text='Arts')
+    category.text = '\n      '
+    category.tail = '\n    '
+    sub_category = ETree.SubElement(category, 'itunes:category', text='Literature')
+    sub_category.tail = '\n    '
     owner = ETree.SubElement(channel, 'itunes:owner')
+    owner.text = '\n      '
+    owner.tail = '\n    '
     email = ETree.SubElement(owner, 'itunes:email')
     email.text = podcast_info['owner_email']
+    email.tail = '\n    '
     explicit = ETree.SubElement(channel, 'itunes:explicit')
     explicit.text = 'no'
+    explicit.tail = '\n    '
     return rss
 
 
 def add_item_to_podcast(rss, podcast_info, mp3_info, index):
     channel = rss.find('channel')
     item = ETree.SubElement(channel, 'item')
+    item.text = '\n      '
+    item.tail = '\n    '
     title = ETree.SubElement(item, 'title')
     title.text = mp3_info['title']
-    enclosure = ETree.SubElement(item, 'enclosure')
-    enclosure.set('url', '{}{}'.format(podcast_info['base_url'], mp3_info['name']))
-    enclosure.set('length', str(mp3_info['size']))
-    enclosure.set('type', 'audio/mpeg')
-    guid = ETree.SubElement(item, 'guid')
-    guid.set('isPermaLink', 'false')
+    title.tail = '\n      '
+    enclosure = ETree.SubElement(item, 'enclosure', url=podcast_info['base_url'] + mp3_info['name'], type='audio/mpeg',
+                                 length=str(mp3_info['size']))
+    enclosure.tail = '\n      '
+    guid = ETree.SubElement(item, 'guid', isPermaLink='false')
     guid.text = str(uuid.uuid4())
+    guid.tail = '\n      '
     pub_date = ETree.SubElement(item, 'pubDate')
     pub_date.text = get_pub_date(index)
+    pub_date.tail = '\n      '
     duration = ETree.SubElement(item, 'itunes:duration')
     duration.text = mp3_info['duration']
+    duration.tail = '\n    '
 
 
 def duration_string(num_seconds):
