@@ -10,7 +10,7 @@ import xml.etree.ElementTree as ETree
 
 def get_pub_date(index):
     date = datetime.date(2016, 1, 1) + datetime.timedelta(days=index)
-    return '{0:%a}, {0.day} {0:%b %Y} 08:00:00 +0000'.format(date)
+    return f'{date:%a}, {date.day} {date:%b %Y} 08:00:00 +0000'
 
 
 def make_podcast_xml(podcast_info):
@@ -22,7 +22,8 @@ def make_podcast_xml(podcast_info):
     channel = ETree.SubElement(rss, 'channel')
     channel.text = '\n    '
     channel.tail = '\n'
-    link_self = ETree.SubElement(channel, 'atom:link', href='{base_url}_.xml'.format(**podcast_info), rel='self')
+    base_url = podcast_info['base_url']
+    link_self = ETree.SubElement(channel, 'atom:link', href=f'{base_url}_.xml', rel='self')
     link_self.tail = '\n    '
     language = ETree.SubElement(channel, 'language')
     language.text = 'en-us'
@@ -33,7 +34,7 @@ def make_podcast_xml(podcast_info):
     author = ETree.SubElement(channel, 'itunes:author')
     author.text = podcast_info['author']
     author.tail = '\n    '
-    image = ETree.SubElement(channel, 'itunes:image', href='{base_url}_.jpg'.format(**podcast_info))
+    image = ETree.SubElement(channel, 'itunes:image', href=f'{base_url}_.jpg')
     image.tail = '\n    '
     link = ETree.SubElement(channel, 'link')
     link.text = podcast_info['base_url']
@@ -69,8 +70,10 @@ def add_item_to_podcast(rss, podcast_info, mp3_info, index):
     title = ETree.SubElement(item, 'title')
     title.text = mp3_info['title']
     title.tail = '\n      '
-    enclosure = ETree.SubElement(item, 'enclosure', url=podcast_info['base_url'] + mp3_info['name'], type='audio/mpeg',
-                                 length=str(mp3_info['size']))
+    base_url = podcast_info['base_url']
+    item_name = mp3_info['name']
+    length = str(mp3_info['size'])
+    enclosure = ETree.SubElement(item, 'enclosure', url=f'{base_url}{item_name}', type='audio/mpeg', length=length)
     enclosure.tail = '\n      '
     guid = ETree.SubElement(item, 'guid', isPermaLink='false')
     guid.text = str(uuid.uuid4())
@@ -95,7 +98,7 @@ def duration_string(num_seconds):
         else:
             hours = minutes // 60
             minutes %= 60
-    return '{}:{:02d}:{:02d}'.format(hours, minutes, seconds)
+    return f'{hours}:{minutes:02d}:{seconds:02d}'
 
 
 def get_mp3s(path):
