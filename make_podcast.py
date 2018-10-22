@@ -8,6 +8,7 @@ import sys
 import uuid
 import xml.etree.ElementTree as ETree
 
+from typing import Dict, Union
 
 def version() -> str:
     """Read version from Dockerfile"""
@@ -19,12 +20,12 @@ def version() -> str:
     return 'unknown'
 
 
-def get_pub_date(index):
+def get_pub_date(index: int) -> str:
     date = datetime.date(2016, 1, 1) + datetime.timedelta(days=index)
     return f'{date:%a}, {date.day} {date:%b %Y} 08:00:00 +0000'
 
 
-def make_podcast_xml(podcast_info):
+def make_podcast_xml(podcast_info: Dict) -> ETree.Element:
     rss_attrib = {'version': '2.0', 'xmlns:atom': 'http://www.w3.org/2005/Atom',
                   'xmlns:itunes': 'http://www.itunes.com/dtds/podcast-1.0.dtd'}
     rss = ETree.Element('rss', attrib=rss_attrib)
@@ -73,7 +74,7 @@ def make_podcast_xml(podcast_info):
     return rss
 
 
-def add_item_to_podcast(rss, podcast_info, mp3_info, index):
+def add_item_to_podcast(rss: ETree.Element, podcast_info: Dict, mp3_info: Dict, index: int):
     channel = rss.find('channel')
     item = ETree.SubElement(channel, 'item')
     item.text = '\n      '
@@ -97,7 +98,7 @@ def add_item_to_podcast(rss, podcast_info, mp3_info, index):
     duration.tail = '\n    '
 
 
-def duration_string(num_seconds):
+def duration_string(num_seconds: int) -> str:
     hours = minutes = 0
     if num_seconds < 60:
         seconds = num_seconds
@@ -112,7 +113,7 @@ def duration_string(num_seconds):
     return f'{hours}:{minutes:02d}:{seconds:02d}'
 
 
-def get_mp3s(path):
+def get_mp3s(path: Union[pathlib.Path, str]):
     if isinstance(path, pathlib.Path):
         p = path.resolve()
     else:
