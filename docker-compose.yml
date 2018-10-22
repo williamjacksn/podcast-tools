@@ -1,0 +1,6 @@
+version: '3'
+
+services:
+  make-podcast:
+    image: williamjackson/make-podcast
+    build: .
