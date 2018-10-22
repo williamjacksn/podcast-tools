@@ -1,11 +1,22 @@
-import argparse
 import datetime
 import json
 import mutagen.id3
 import mutagen.mp3
+import os
 import pathlib
+import sys
 import uuid
 import xml.etree.ElementTree as ETree
+
+
+def version() -> str:
+    """Read version from Dockerfile"""
+    dockerfile = pathlib.Path(__file__).resolve().parent / 'Dockerfile'
+    with open(dockerfile) as f:
+        for line in f:
+            if 'org.label-schema.version' in line:
+                return line.strip().split('=', maxsplit=1)[1]
+    return 'unknown'
 
 
 def get_pub_date(index):
@@ -122,16 +133,16 @@ def get_file_info(mp3: pathlib.Path):
     return info
 
 
-def parse_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('path')
-    return parser.parse_args()
-
-
 def main():
-    args = parse_args()
+    print(f'make-podcast {version()}')
+    source_dir = os.getenv('SOURCE_DIR')
+    if source_dir is None:
+        print('Please set SOURCE_DIR to the directory containing your mp3 files')
+        sys.exit(1)
+    print(f'Source directory is {source_dir}')
+    path = pathlib.Path(source_dir).resolve()
+    print(f'Resolved source directory is {path}')
     info = {'base_url': '', 'title': '', 'author': '', 'description': '', 'owner_email': ''}
-    path = pathlib.Path(args.path).resolve()
     saved_info_path = path / 'podcast_info.json'
     if saved_info_path.exists():
         with saved_info_path.open() as f:
@@ -146,11 +157,12 @@ def main():
 
     rss = make_podcast_xml(info)
 
-    for index, mp3 in enumerate(sorted(list(get_mp3s(args.path)))):
+    for index, mp3 in enumerate(sorted(list(get_mp3s(path)))):
         add_item_to_podcast(rss, info, get_file_info(mp3), index)
 
     tree = ETree.ElementTree(rss)
     tree.write(path / '_.xml', encoding='utf-8', xml_declaration=True)
+
 
 if __name__ == '__main__':
     main()
