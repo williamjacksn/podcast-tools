@@ -55,6 +55,9 @@ def make_podcast_xml(podcast_info):
     explicit = ETree.SubElement(channel, 'itunes:explicit')
     explicit.text = 'no'
     explicit.tail = '\n    '
+    block = ETree.SubElement(channel, 'itunes:block')
+    block.text = 'yes'
+    block.tail = '\n    '
     return rss
 
 
