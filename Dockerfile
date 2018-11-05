@@ -1,8 +1,8 @@
-FROM python:3.7.0-alpine3.8
+FROM python:3.7.1-alpine3.8
 
-COPY requirements-docker.txt /make-podcast/requirements-docker.txt
+COPY requirements.txt /make-podcast/requirements.txt
 
-RUN /usr/local/bin/pip install --no-cache-dir --requirement /make-podcast/requirements-docker.txt
+RUN /usr/local/bin/pip install --no-cache-dir --requirement /make-podcast/requirements.txt
 
 COPY . /make-podcast
 
