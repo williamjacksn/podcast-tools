@@ -1,13 +1,12 @@
 FROM python:3.7.2-alpine3.9
 
-COPY requirements.txt /make-podcast/requirements.txt
+COPY requirements.txt /podcast-tools/requirements.txt
 
-RUN /usr/local/bin/pip install --no-cache-dir --requirement /make-podcast/requirements.txt
+RUN /usr/local/bin/pip install --no-cache-dir --requirement /podcast-tools/requirements.txt
 
-COPY . /make-podcast
+COPY . /podcast-tools
 
-ENTRYPOINT ["/usr/local/bin/python"]
-CMD ["/make-podcast/make_podcast.py"]
+ENTRYPOINT ["/bin/sh"]
 
 ENV PYTHONUNBUFFERED 1
 

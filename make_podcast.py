@@ -10,6 +10,7 @@ import xml.etree.ElementTree as ETree
 
 from typing import Dict, Union
 
+
 def version() -> str:
     """Read version from Dockerfile"""
     dockerfile = pathlib.Path(__file__).resolve().parent / 'Dockerfile'

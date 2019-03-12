@@ -1,3 +1,3 @@
-# make-podcast
+# Podcast Tools
 
-Generate podcast XML from a directory of MP3 files
+* `make_podcast`: Generate podcast XML from a directory of MP3 files
