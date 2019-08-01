@@ -11,7 +11,7 @@ def version() -> str:
     dockerfile = pathlib.Path(__file__).resolve().parent / 'Dockerfile'
     with open(dockerfile) as f:
         for line in f:
-            if 'org.label-schema.version' in line:
+            if 'org.opencontainers.image.version' in line:
                 return line.strip().split('=', maxsplit=1)[1]
     return 'unknown'
 
@@ -31,8 +31,6 @@ def main():
     items = channel.findall('item')
     working_dir = pathlib.Path().resolve()
     for item in items:
-        title = item.find('title')
-        guid = item.find('guid')
         enclosure = item.find('enclosure')
         url = enclosure.get('url')
         parsed_url = urllib.parse.urlparse(url)

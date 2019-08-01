@@ -10,6 +10,6 @@ ENTRYPOINT ["/bin/sh"]
 
 ENV PYTHONUNBUFFERED 1
 
-LABEL maintainer=william@subtlecoolness.com \
-      org.label-schema.schema-version=1.0 \
-      org.label-schema.version=2.0.3
+LABEL org.opencontainers.image.authors="William Jackson <william@subtlecoolness.com>" \
+      org.opencontainers.image.source="https://github.com/williamjacksn/podcast-tools" \
+      org.opencontainers.image.version=2.0.3
