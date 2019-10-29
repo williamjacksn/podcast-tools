@@ -8,8 +8,9 @@ COPY . /podcast-tools
 
 ENTRYPOINT ["/bin/sh"]
 
-ENV PYTHONUNBUFFERED 1
+ENV APP_VERSION="2.0.4" \
+    PYTHONUNBUFFERED="1"
 
 LABEL org.opencontainers.image.authors="William Jackson <william@subtlecoolness.com>" \
       org.opencontainers.image.source="https://github.com/williamjacksn/podcast-tools" \
-      org.opencontainers.image.version=2.0.4
+      org.opencontainers.image.version="${APP_VERSION}"

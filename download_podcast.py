@@ -7,13 +7,7 @@ import xml.etree.ElementTree
 
 
 def version() -> str:
-    """Read version from Dockerfile"""
-    dockerfile = pathlib.Path(__file__).resolve().parent / 'Dockerfile'
-    with open(dockerfile) as f:
-        for line in f:
-            if 'org.opencontainers.image.version' in line:
-                return line.strip().split('=', maxsplit=1)[1]
-    return 'unknown'
+    return os.getenv('APP_VERSION', 'unknown')
 
 
 def main():
