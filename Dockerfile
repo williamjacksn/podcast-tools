@@ -1,4 +1,4 @@
-FROM python:3.8.0-alpine3.10
+FROM python:3.8.3-alpine3.10
 
 COPY requirements.txt /podcast-tools/requirements.txt
 
