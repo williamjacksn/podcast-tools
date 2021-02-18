@@ -1,6 +1,5 @@
-version: '3.7'
+version: '3.8'
 
 services:
   podcast-tools:
-    image: williamjackson/podcast-tools
-    build: .
+    image: ghcr.io/williamjacksn/podcast-tools
