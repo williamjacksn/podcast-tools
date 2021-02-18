@@ -30,19 +30,9 @@ jobs:
         if: github.event_name == 'push' || github.event_name == 'release'
         uses: docker/build-push-action@v1.1.0
         with:
-          repository: ${{ github.repository }}/podcast-tools
-          registry: docker.pkg.github.com
-          username: ${{ github.actor }}
-          password: ${{ github.token }}
-          tag_with_ref: true
-          add_git_labels: true
-
-      - name: Tag and push the image (Docker Hub)
-        if: github.event_name == 'push' || github.event_name == 'release'
-        uses: docker/build-push-action@v1.1.0
-        with:
-          repository: williamjackson/podcast-tools
-          username: ${{ secrets.docker_hub_username }}
-          password: ${{ secrets.docker_hub_password }}
+          repository: ${{ github.repository_owner }}/podcast-tools
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.ghcr_token }}
           tag_with_ref: true
           add_git_labels: true
