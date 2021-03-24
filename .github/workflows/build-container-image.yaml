@@ -33,6 +33,6 @@ jobs:
           repository: ${{ github.repository_owner }}/podcast-tools
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.ghcr_token }}
+          password: ${{ github.token }}
           tag_with_ref: true
           add_git_labels: true
