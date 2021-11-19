@@ -1,5 +1,4 @@
-version: '3.8'
-
 services:
   podcast-tools:
     image: ghcr.io/williamjacksn/podcast-tools
+    init: true
