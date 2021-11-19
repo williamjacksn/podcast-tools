@@ -5,7 +5,7 @@ RUN /usr/sbin/adduser -g python -D python
 USER python
 RUN /usr/local/bin/python -m venv /home/python/venv
 
-ENV APP_VERSION="2021.1" \
+ENV APP_VERSION="2021.2" \
     PATH="/home/python/venv/bin:${PATH}" \
     PYTHONUNBUFFERED="1"
 
