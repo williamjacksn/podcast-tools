@@ -2,3 +2,8 @@ services:
   podcast-tools:
     image: ghcr.io/williamjacksn/podcast-tools
     init: true
+
+  shell:
+    image: ghcr.io/williamjacksn/podcast-tools
+    volumes:
+      - ./:/home/python/podcast-tools
