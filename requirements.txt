@@ -6,7 +6,7 @@
 #
 --extra-index-url https://alpine-wheels.github.io/index
 
-certifi==2022.6.15
+certifi==2022.6.15.1
     # via requests
 charset-normalizer==2.1.1
     # via requests
