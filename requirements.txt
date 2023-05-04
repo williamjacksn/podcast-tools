@@ -14,7 +14,7 @@ idna==3.4
     # via requests
 mutagen==1.46.0
     # via -r requirements.in
-requests==2.29.0
+requests==2.30.0
     # via -r requirements.in
 urllib3==1.26.15
     # via requests
