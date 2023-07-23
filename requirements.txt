@@ -16,5 +16,5 @@ mutagen==1.46.0
     # via -r requirements.in
 requests==2.31.0
     # via -r requirements.in
-urllib3==2.0.3
+urllib3==2.0.4
     # via requests
