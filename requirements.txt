@@ -12,7 +12,7 @@ charset-normalizer==3.2.0
     # via requests
 idna==3.4
     # via requests
-mutagen==1.46.0
+mutagen==1.47.0
     # via -r requirements.in
 requests==2.31.0
     # via -r requirements.in
