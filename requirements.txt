@@ -10,7 +10,7 @@ certifi==2024.2.2
     # via requests
 charset-normalizer==3.3.2
     # via requests
-idna==3.6
+idna==3.7
     # via requests
 mutagen==1.47.0
     # via -r requirements.in
