@@ -5,8 +5,7 @@ RUN /usr/sbin/adduser -g python -D python
 USER python
 RUN /usr/local/bin/python -m venv /home/python/venv
 
-ENV APP_VERSION="2021.2" \
-    PATH="/home/python/venv/bin:${PATH}" \
+ENV PATH="/home/python/venv/bin:${PATH}" \
     PYTHONUNBUFFERED="1"
 
 COPY --chown=python:python requirements.txt /home/python/podcast-tools/requirements.txt
@@ -19,5 +18,4 @@ WORKDIR /home/python/podcast-tools
 ENTRYPOINT ["/bin/sh"]
 
 LABEL org.opencontainers.image.authors="William Jackson <william@subtlecoolness.com>" \
-      org.opencontainers.image.source="https://github.com/williamjacksn/podcast-tools" \
-      org.opencontainers.image.version="${APP_VERSION}"
+      org.opencontainers.image.source="https://github.com/williamjacksn/podcast-tools"

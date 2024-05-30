@@ -6,12 +6,7 @@ import urllib.parse
 import xml.etree.ElementTree
 
 
-def version() -> str:
-    return os.getenv('APP_VERSION', 'unknown')
-
-
 def main():
-    print(f'download-podcast {version()}')
     podcast_url = os.getenv('PODCAST_URL')
     if podcast_url is None:
         print('Please set PODCAST_URL')

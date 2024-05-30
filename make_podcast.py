@@ -11,10 +11,6 @@ import xml.etree.ElementTree as ETree
 from typing import Dict, Union
 
 
-def version() -> str:
-    return os.getenv('APP_VERSION', 'unknown')
-
-
 def get_pub_date(index: int) -> str:
     date = datetime.date(2016, 1, 1) + datetime.timedelta(days=index)
     return f'{date:%a}, {date.day} {date:%b %Y} 08:00:00 +0000'
@@ -130,7 +126,6 @@ def get_file_info(mp3: pathlib.Path):
 
 
 def main():
-    print(f'make-podcast {version()}')
     source_dir = os.getenv('SOURCE_DIR')
     if source_dir is None:
         print('Please set SOURCE_DIR to the directory containing your mp3 files')
