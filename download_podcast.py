@@ -1,6 +1,6 @@
+import httpx
 import os
 import pathlib
-import requests
 import sys
 import urllib.parse
 import xml.etree.ElementTree
@@ -17,7 +17,7 @@ def main():
         print('Please set PODCAST_URL')
         sys.exit(1)
     print(f'PODCAST_URL is {podcast_url}')
-    response = requests.get(podcast_url)
+    response = httpx.get(podcast_url)
     print(f'Response encoding is {response.encoding}')
     text = response.text
     root = xml.etree.ElementTree.fromstring(text)
@@ -33,7 +33,7 @@ def main():
         target_path = working_dir / source_path.name
         print(f'Saving to {target_path}')
         with target_path.open('wb') as f:
-            source = requests.get(url)
+            source = httpx.get(url)
             f.write(source.content)
 
 
