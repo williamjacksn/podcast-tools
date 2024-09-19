@@ -6,7 +6,7 @@
 #
 --extra-index-url https://alpine-wheels.github.io/index
 
-anyio==4.4.0
+anyio==4.5.0
     # via httpx
 certifi==2024.8.30
     # via
