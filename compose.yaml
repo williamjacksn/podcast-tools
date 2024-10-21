@@ -2,7 +2,7 @@ services:
   pip-compile:
     entrypoint:
       - /home/python/venv/bin/pip-compile
-    image: ghcr.io/williamjacksn/pip-tools:py3.12
+    image: ghcr.io/williamjacksn/pip-tools:py3.13
     init: true
     volumes:
       - ./:/home/python/podcast-tools
