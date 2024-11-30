@@ -1,4 +1,4 @@
-FROM python:3.12-slim
+FROM python:3.13-slim
 
 RUN /usr/sbin/useradd --create-home --shell /bin/bash --user-group python
 
