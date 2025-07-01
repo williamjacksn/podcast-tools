@@ -1,16 +1,41 @@
-version: 2
-updates:
-  - package-ecosystem: docker
-    directory: /
-    schedule:
-      interval: daily
-  - package-ecosystem: github-actions
-    directory: /
-    schedule:
-      interval: daily
-  - package-ecosystem: pip
-    directory: /
-    allow:
-      - dependency-type: all
-    schedule:
-      interval: daily
+{
+  "updates": [
+    {
+      "allow": [
+        {
+          "dependency-type": "all"
+        }
+      ],
+      "directory": "/",
+      "package-ecosystem": "docker",
+      "schedule": {
+        "interval": "daily"
+      }
+    },
+    {
+      "allow": [
+        {
+          "dependency-type": "all"
+        }
+      ],
+      "directory": "/",
+      "package-ecosystem": "github-actions",
+      "schedule": {
+        "interval": "daily"
+      }
+    },
+    {
+      "allow": [
+        {
+          "dependency-type": "all"
+        }
+      ],
+      "directory": "/",
+      "package-ecosystem": "uv",
+      "schedule": {
+        "interval": "daily"
+      }
+    }
+  ],
+  "version": 2
+}
