@@ -12,7 +12,7 @@ from typing import Dict, Union
 
 
 def get_pub_date(index: int) -> str:
-    date = datetime.date(2016, 1, 1) + datetime.timedelta(days=index)
+    date = datetime.date(2026, 1, 1) + datetime.timedelta(days=index)
     return f"{date:%a}, {date.day} {date:%b %Y} 08:00:00 +0000"
 
 
